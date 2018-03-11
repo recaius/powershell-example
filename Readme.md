@@ -6,6 +6,8 @@ $json = @{ machine_translation= @{ service_id= ''; password= '' } } | ConvertTo-
 $token = Invoke-RestMethod https://api.recaius.jp/auth/v2/tokens -Method Post -Body $json -ContentType 'application/json'
 ```
 
+お使いのサービスIDとパスワードを設定してください。
+
 取得されたトークンは `$token.token` に格納されます。
 
 
@@ -19,7 +21,7 @@ $headers = @{ 'X-Token'= $token.token }
 $trans = invoke-restmethod https://api.recaius.jp/mt/v2/translate -Method Post -Body $jsonBytes -ContentType 'application/json' -Headers $headers
 ```
 
-POSTする翻訳したい文字列は、UTF8のバイト列とする必要があります。
+翻訳したい文字列は、UTF8のバイト列とする必要があります。
 
 翻訳されたテキストは `$trans.data.translations[0].translatedText` に格納されます。
 
